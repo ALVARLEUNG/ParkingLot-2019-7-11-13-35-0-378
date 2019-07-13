@@ -97,6 +97,21 @@ public class ParkingBoyTest {
 
     }
 
+    @Test
+    public void should_return_no_ticket_when_parking_car_given_more_then_limit_cars () {
+        //Given
+        ParkingLot parkingLot = new ParkingLot();
+        ParkingBoy parkingBoy = new ParkingBoy (parkingLot);
+        for (int i =0;i<=10;i++) {
+            parkingBoy.parkCar(new Car());
+        }
+
+        //When
+        ParkingTicket ticket = parkingBoy.parkCar(new Car());
+
+        // Then
+        Assertions.assertSame(null, ticket);
+    }
 
 
     }
