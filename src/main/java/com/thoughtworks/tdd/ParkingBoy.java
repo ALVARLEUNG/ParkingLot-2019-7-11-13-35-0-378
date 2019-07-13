@@ -8,11 +8,11 @@ public class ParkingBoy {
     }
 
 
-    public ParkingTicket parkCar(Car car) {
+    public ParkingCarResult parkCar(Car car) {
         return this.parkingLot.park(car);
     }
 
-    public Car fetchCar(ParkingTicket ticket) {
+    public FetchCarResult fetchCar(ParkingTicket ticket) {
         return parkingLot.getCar(ticket);
     }
 }

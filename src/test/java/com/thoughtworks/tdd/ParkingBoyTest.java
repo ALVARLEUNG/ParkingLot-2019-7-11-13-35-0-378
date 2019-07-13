@@ -1,5 +1,6 @@
 package com.thoughtworks.tdd;
 
+import jdk.nashorn.internal.ir.annotations.Ignore;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -12,13 +13,14 @@ public class ParkingBoyTest {
         ParkingLot parkingLot = new ParkingLot();
         Car car = new Car();
         ParkingBoy parkingBoy = new ParkingBoy (parkingLot);
-        ParkingTicket ticket = parkingBoy.parkCar(car);
+        ParkingCarResult parkingCarResult = parkingBoy.parkCar(car);
 
         //When
-        Car fetchCar = parkingBoy.fetchCar(ticket);
+        FetchCarResult fetchCarResult = parkingBoy.fetchCar(parkingCarResult.getParkingTicket());
 
         // Then
-        Assertions.assertSame(car, fetchCar);
+        Assertions.assertSame(car, fetchCarResult.getCar());
+
 
     }
 
@@ -29,13 +31,13 @@ public class ParkingBoyTest {
         ParkingLot parkingLot = new ParkingLot();
         Car car = new Car();
         ParkingBoy parkingBoy = new ParkingBoy (parkingLot);
-        ParkingTicket ticket = parkingBoy.parkCar(car);
+        ParkingCarResult parkingCarResult = parkingBoy.parkCar(car);
 
         //When
-        Car fetchCar = parkingBoy.fetchCar(null);
+        FetchCarResult fetchCarResult = parkingBoy.fetchCar(null);
 
         // Then
-        Assertions.assertSame(null, fetchCar);
+        Assertions.assertSame(null, fetchCarResult.getCar());
 
     }
 
@@ -47,17 +49,17 @@ public class ParkingBoyTest {
         Car car1 = new Car();
         Car car2 = new Car();
         ParkingBoy parkingBoy = new ParkingBoy (parkingLot);
-        ParkingTicket ticket1 = parkingBoy.parkCar(car1);
-        ParkingTicket ticket2 = parkingBoy.parkCar(car2);
+        ParkingCarResult parkingCarResult1 = parkingBoy.parkCar(car1);
+        ParkingCarResult parkingCarResult2 = parkingBoy.parkCar(car2);
 
         //When
-        Car fetchCar1 = parkingBoy.fetchCar(ticket1);
-        Car fetchCar2 = parkingBoy.fetchCar(ticket2);
+        FetchCarResult fetchCarResult1 = parkingBoy.fetchCar(parkingCarResult1.getParkingTicket());
+        FetchCarResult fetchCarResult2 = parkingBoy.fetchCar(parkingCarResult2.getParkingTicket());
 
 
-        // Then
-        Assertions.assertSame(car1, fetchCar1);
-        Assertions.assertSame(car2, fetchCar2);
+//        // Then
+        Assertions.assertSame(car1, fetchCarResult1.getCar());
+        Assertions.assertSame(car2, fetchCarResult2.getCar());
 
     }
 
@@ -67,15 +69,14 @@ public class ParkingBoyTest {
         //Given
         ParkingLot parkingLot = new ParkingLot();
         Car car1 = new Car();
-        Car car2 = new Car();
         ParkingBoy parkingBoy = new ParkingBoy (parkingLot);
-        ParkingTicket ticket1 = parkingBoy.parkCar(car1);
+        ParkingCarResult parkingCarResult = parkingBoy.parkCar(car1);
 
         //When
-        Car fetchCar1 = parkingBoy.fetchCar(new ParkingTicket());
+        FetchCarResult fetchCarResult = parkingBoy.fetchCar(new ParkingTicket());
 
         // Then
-        Assertions.assertSame(null, fetchCar1);
+        Assertions.assertSame(null, fetchCarResult.getCar());
 
     }
 
@@ -86,14 +87,14 @@ public class ParkingBoyTest {
         ParkingLot parkingLot = new ParkingLot();
         Car car = new Car();
         ParkingBoy parkingBoy = new ParkingBoy (parkingLot);
-        ParkingTicket ticket = parkingBoy.parkCar(car);
+        ParkingCarResult parkingCarResult = parkingBoy.parkCar(car);
 
         //When
-        Car fetchCar1 = parkingBoy.fetchCar(ticket);
-        Car fetchCar2 = parkingBoy.fetchCar(ticket);
+        FetchCarResult fetchCarResult1 = parkingBoy.fetchCar(parkingCarResult.getParkingTicket());
+        FetchCarResult fetchCarResult2 = parkingBoy.fetchCar(parkingCarResult.getParkingTicket());
 
         // Then
-        Assertions.assertSame(null, fetchCar2);
+        Assertions.assertSame(null, fetchCarResult2.getCar());
 
     }
 
@@ -107,11 +108,12 @@ public class ParkingBoyTest {
         }
 
         //When
-        ParkingTicket ticket = parkingBoy.parkCar(new Car());
+        ParkingCarResult parkingCarResult = parkingBoy.parkCar(new Car());
 
         // Then
-        Assertions.assertSame(null, ticket);
+        Assertions.assertSame(null, parkingCarResult.getParkingTicket());
     }
+
 
     @Test
     public void should_return_no_ticket_when_parking_car_given_no_car () {
@@ -120,11 +122,25 @@ public class ParkingBoyTest {
         ParkingBoy parkingBoy = new ParkingBoy (parkingLot);
 
         //When
-        ParkingTicket ticket = parkingBoy.parkCar(null);
+        ParkingCarResult parkingCarResult = parkingBoy.parkCar(null);
 
         // Then
-        Assertions.assertSame(null, ticket);
+        Assertions.assertSame(null, parkingCarResult.getParkingTicket());
     }
 
+    @Test
+    public void should_return_Unrecognized_message_ticket_when_fetch_car_given_wrong_ticket () {
+        //Given
+        ParkingLot parkingLot = new ParkingLot();
+        Car car1 = new Car();
+        ParkingBoy parkingBoy = new ParkingBoy (parkingLot);
+        ParkingCarResult parkingCarResult = parkingBoy.parkCar(car1);
+
+        //When
+        FetchCarResult fetchCarResult = parkingBoy.fetchCar(new ParkingTicket());
+
+        // Then
+        Assertions.assertSame("Unrecognized parking ticket", fetchCarResult.getResultMessage());
+    }
 
     }

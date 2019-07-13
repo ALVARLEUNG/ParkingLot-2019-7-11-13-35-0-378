@@ -9,15 +9,28 @@ public class ParkingLot {
         this.parkingCarTicket = new HashMap<>(10);
     }
 
-    public Car getCar(ParkingTicket ticket) {
-    return parkingCarTicket.remove(ticket);
+    public FetchCarResult getCar(ParkingTicket ticket) {
+        FetchCarResult fetchCarResult = new FetchCarResult();
+        if (parkingCarTicket.get(ticket)==null) {
+            fetchCarResult.setResultMessage("Unrecognized parking ticket");
+            return fetchCarResult;
+        } else {
+            fetchCarResult.setCar(parkingCarTicket.remove(ticket));
+            return fetchCarResult;
+        }
     }
 
-    public ParkingTicket park(Car car) {
-        ParkingTicket parkingTicket = new ParkingTicket();
-        if(parkingCarTicket.size()>10 || car == null) return null;
-        parkingCarTicket.put(parkingTicket, car);
-        return parkingTicket;
+    public ParkingCarResult park(Car car) {
+        ParkingCarResult parkingCarResult = new ParkingCarResult();
+        if(parkingCarTicket.size()>10 || car == null) {
+            parkingCarResult.setResultMessage("Please provide your parking ticket.");
+            return parkingCarResult;
+        }else {
+            ParkingTicket parkingTicket = new ParkingTicket();
+            parkingCarTicket.put(parkingTicket, car);
+            parkingCarResult.setParkingTicket(parkingTicket);
+            return parkingCarResult;
+        }
     }
 
 }
