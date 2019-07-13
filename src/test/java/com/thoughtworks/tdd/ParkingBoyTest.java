@@ -129,7 +129,7 @@ public class ParkingBoyTest {
     }
 
     @Test
-    public void should_return_Unrecognized_message_ticket_when_fetch_car_given_wrong_ticket () {
+    public void should_return_message_about_unrecognized__ticket_when_fetch_car_given_wrong_ticket () {
         //Given
         ParkingLot parkingLot = new ParkingLot();
         Car car1 = new Car();
@@ -141,6 +141,21 @@ public class ParkingBoyTest {
 
         // Then
         Assertions.assertSame("Unrecognized parking ticket", fetchCarResult.getResultMessage());
+    }
+
+    @Test
+    public void should_return_message_about_provide_ticket_when_fetch_car_given_have_no_ticket () {
+        //Given
+        ParkingLot parkingLot = new ParkingLot();
+        Car car1 = new Car();
+        ParkingBoy parkingBoy = new ParkingBoy (parkingLot);
+        ParkingCarResult parkingCarResult = parkingBoy.parkCar(car1);
+
+        //When
+        FetchCarResult fetchCarResult = parkingBoy.fetchCar(null);
+
+        // Then
+        Assertions.assertSame("Please provide your parking ticket", fetchCarResult.getResultMessage());
     }
 
     }

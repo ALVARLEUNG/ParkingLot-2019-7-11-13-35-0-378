@@ -13,6 +13,11 @@ public class ParkingBoy {
     }
 
     public FetchCarResult fetchCar(ParkingTicket ticket) {
+        if (ticket == null){
+            FetchCarResult fetchCarResult = new FetchCarResult();
+            fetchCarResult.setResultMessage("Please provide your parking ticket");
+            return fetchCarResult;
+        }
         return parkingLot.getCar(ticket);
     }
 }
