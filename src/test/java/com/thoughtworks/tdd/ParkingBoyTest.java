@@ -158,4 +158,20 @@ public class ParkingBoyTest {
         Assertions.assertSame("Please provide your parking ticket", fetchCarResult.getResultMessage());
     }
 
+    @Test
+    public void should_return_message_about_not_enough_position_when_parking_car_given_no_position () {
+        //Given
+        ParkingLot parkingLot = new ParkingLot();
+        ParkingBoy parkingBoy = new ParkingBoy (parkingLot);
+        for (int i =0;i<=10;i++) {
+            parkingBoy.parkCar(new Car());
+        }
+
+        //When
+        ParkingCarResult parkingCarResult = parkingBoy.parkCar(new Car());
+
+        // Then
+        Assertions.assertSame("Not enough position.", parkingCarResult.getResultMessage());
+    }
+
     }

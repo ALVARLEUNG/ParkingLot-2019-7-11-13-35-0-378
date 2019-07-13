@@ -23,7 +23,7 @@ public class ParkingLot {
     public ParkingCarResult park(Car car) {
         ParkingCarResult parkingCarResult = new ParkingCarResult();
         if(parkingCarTicket.size()>10 || car == null) {
-            parkingCarResult.setResultMessage("Please provide your parking ticket.");
+            parkingCarResult.setResultMessage("Not enough position.");
             return parkingCarResult;
         }else {
             ParkingTicket parkingTicket = new ParkingTicket();
