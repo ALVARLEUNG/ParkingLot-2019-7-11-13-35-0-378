@@ -113,5 +113,18 @@ public class ParkingBoyTest {
         Assertions.assertSame(null, ticket);
     }
 
+    @Test
+    public void should_return_no_ticket_when_parking_car_given_no_car () {
+        //Given
+        ParkingLot parkingLot = new ParkingLot();
+        ParkingBoy parkingBoy = new ParkingBoy (parkingLot);
+
+        //When
+        ParkingTicket ticket = parkingBoy.parkCar(null);
+
+        // Then
+        Assertions.assertSame(null, ticket);
+    }
+
 
     }
