@@ -28,4 +28,8 @@ public class ParkingLot {
     public HashMap<ParkingTicket, Car> getParkingCarTicket() {
         return parkingCarTicket;
     }
+
+    public void setParkingCarTicket(HashMap<ParkingTicket, Car> parkingCarTicket) {
+        this.parkingCarTicket = parkingCarTicket;
+    }
 }

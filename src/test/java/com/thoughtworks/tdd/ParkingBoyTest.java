@@ -4,7 +4,9 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class ParkingBoyTest {
 
@@ -216,6 +218,32 @@ public class ParkingBoyTest {
 
         // Then
         Assertions.assertNotNull(parkingCarResult.getParkingTicket());
+    }
+
+    @Test
+    public void should_return_ticket_and_park_the_car_in_first_lot_when_parking_car_by_smart_boy_given_first_lot_more_empty_then_second_lot() {
+        //Given
+        ParkingLot parkingLot1 = new ParkingLot();
+        ParkingLot parkingLot2 = new ParkingLot();
+        List<ParkingLot> parkingLots = new ArrayList<>();
+        parkingLots.add(parkingLot1);
+        parkingLots.add(parkingLot2);
+
+        SmartParkingBoy smartParkingBoy = new SmartParkingBoy(parkingLots);
+
+
+        Car car1 = new Car();
+        HashMap<ParkingTicket, Car> parkingCarTicket = new HashMap<>();
+        parkingCarTicket.put(new ParkingTicket(), car1);
+        parkingLot1.setParkingCarTicket(parkingCarTicket);
+
+
+        //When
+        Car car2 = new Car();
+        ParkingCarResult parkingCarResult =  smartParkingBoy.parkCar(car2);
+
+        // Then
+        Assertions.assertTrue(parkingLot2.getParkingCarTicket().containsKey(parkingCarResult.getParkingTicket()));
     }
 
 }

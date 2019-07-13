@@ -37,4 +37,8 @@ public class ParkingBoy {
             return fetchCarResult;
         }
     }
+
+    public List<ParkingLot> getParkingLots() {
+        return parkingLots;
+    }
 }
