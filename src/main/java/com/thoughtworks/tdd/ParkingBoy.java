@@ -9,8 +9,8 @@ public class ParkingBoy {
 
 
     public ParkingTicket parkCar(Car car) {
-        this.parkingLot.park(car);
-        return null;
+        this.parkingLot.setParkingTicket(this.parkingLot.park(car));
+        return this.parkingLot.getParkingTicket();
     }
 
     public Car fetchCar(ParkingTicket ticket) {
