@@ -1,23 +1,40 @@
 package com.thoughtworks.tdd;
 
-public class ParkingBoy {
-    private ParkingLot parkingLot;
+import java.util.List;
 
-    public ParkingBoy(ParkingLot parkingLot) {
-        this.parkingLot = parkingLot;
+public class ParkingBoy {
+    private List<ParkingLot> parkingLots;
+
+    public ParkingBoy(List<ParkingLot> parkingLot) {
+        this.parkingLots = parkingLot;
     }
 
 
     public ParkingCarResult parkCar(Car car) {
-        return this.parkingLot.park(car);
+        if (null == car) return new ParkingCarResult();
+        for (ParkingLot parkingLot : parkingLots) {
+            if (parkingLot.getParkingCarTicket().size() < 10) {
+                return parkingLot.park(car);
+            }
+        }
+        ParkingCarResult parkingCarResult = new ParkingCarResult();
+        parkingCarResult.setResultMessage("Not enough position.");
+        return parkingCarResult;
     }
 
     public FetchCarResult fetchCar(ParkingTicket ticket) {
-        if (ticket == null){
-            FetchCarResult fetchCarResult = new FetchCarResult();
+        FetchCarResult fetchCarResult = new FetchCarResult();
+        if (ticket == null) {
             fetchCarResult.setResultMessage("Please provide your parking ticket");
             return fetchCarResult;
+        } else {
+            for (ParkingLot parkingLot : parkingLots) {
+                if (parkingLot.getParkingCarTicket().containsKey(ticket)) {
+                    return parkingLot.getCar(ticket);
+                }
+            }
+            fetchCarResult.setResultMessage("Unrecognized parking ticket");
+            return fetchCarResult;
         }
-        return parkingLot.getCar(ticket);
     }
 }

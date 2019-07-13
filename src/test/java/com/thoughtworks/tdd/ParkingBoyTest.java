@@ -1,18 +1,22 @@
 package com.thoughtworks.tdd;
 
-import jdk.nashorn.internal.ir.annotations.Ignore;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ParkingBoyTest {
 
     @Test
-    public void  should_return_car_when_fetch_car_given_have_ticket_by_parking_the_car () {
+    public void should_return_car_when_fetch_car_given_have_ticket_by_parking_the_car() {
 
         //Given
         ParkingLot parkingLot = new ParkingLot();
+        List<ParkingLot> parkingLots = new ArrayList<>();
+        parkingLots.add(parkingLot);
         Car car = new Car();
-        ParkingBoy parkingBoy = new ParkingBoy (parkingLot);
+        ParkingBoy parkingBoy = new ParkingBoy(parkingLots);
         ParkingCarResult parkingCarResult = parkingBoy.parkCar(car);
 
         //When
@@ -25,12 +29,14 @@ public class ParkingBoyTest {
     }
 
     @Test
-    public void  should_return_null_when_fetch_car_given_have_no_ticket_to_fetch_the_car () {
+    public void should_return_null_when_fetch_car_given_have_no_ticket_to_fetch_the_car() {
 
         //Given
         ParkingLot parkingLot = new ParkingLot();
+        List<ParkingLot> parkingLots = new ArrayList<>();
+        parkingLots.add(parkingLot);
         Car car = new Car();
-        ParkingBoy parkingBoy = new ParkingBoy (parkingLot);
+        ParkingBoy parkingBoy = new ParkingBoy(parkingLots);
         ParkingCarResult parkingCarResult = parkingBoy.parkCar(car);
 
         //When
@@ -42,13 +48,15 @@ public class ParkingBoyTest {
     }
 
     @Test
-    public void  should_return_car_when_fetch_car_given_ticket_to_fetch_the_car () {
+    public void should_return_car_when_fetch_car_given_ticket_to_fetch_the_car() {
 
         //Given
         ParkingLot parkingLot = new ParkingLot();
+        List<ParkingLot> parkingLots = new ArrayList<>();
+        parkingLots.add(parkingLot);
         Car car1 = new Car();
         Car car2 = new Car();
-        ParkingBoy parkingBoy = new ParkingBoy (parkingLot);
+        ParkingBoy parkingBoy = new ParkingBoy(parkingLots);
         ParkingCarResult parkingCarResult1 = parkingBoy.parkCar(car1);
         ParkingCarResult parkingCarResult2 = parkingBoy.parkCar(car2);
 
@@ -64,12 +72,14 @@ public class ParkingBoyTest {
     }
 
     @Test
-    public void  should_return_no_car_when_fetch_car_given_wrong_ticket_to_fetch_the_car () {
+    public void should_return_no_car_when_fetch_car_given_wrong_ticket_to_fetch_the_car() {
 
         //Given
         ParkingLot parkingLot = new ParkingLot();
+        List<ParkingLot> parkingLots = new ArrayList<>();
+        parkingLots.add(parkingLot);
         Car car1 = new Car();
-        ParkingBoy parkingBoy = new ParkingBoy (parkingLot);
+        ParkingBoy parkingBoy = new ParkingBoy(parkingLots);
         ParkingCarResult parkingCarResult = parkingBoy.parkCar(car1);
 
         //When
@@ -81,12 +91,14 @@ public class ParkingBoyTest {
     }
 
     @Test
-    public void  should_return_no_car_when_fetch_car_given_used_ticket_to_fetch_the_car () {
+    public void should_return_no_car_when_fetch_car_given_used_ticket_to_fetch_the_car() {
 
         //Given
         ParkingLot parkingLot = new ParkingLot();
+        List<ParkingLot> parkingLots = new ArrayList<>();
+        parkingLots.add(parkingLot);
         Car car = new Car();
-        ParkingBoy parkingBoy = new ParkingBoy (parkingLot);
+        ParkingBoy parkingBoy = new ParkingBoy(parkingLots);
         ParkingCarResult parkingCarResult = parkingBoy.parkCar(car);
 
         //When
@@ -99,11 +111,13 @@ public class ParkingBoyTest {
     }
 
     @Test
-    public void should_return_no_ticket_when_parking_car_given_more_then_limit_cars () {
+    public void should_return_no_ticket_when_parking_car_given_more_then_limit_cars() {
         //Given
         ParkingLot parkingLot = new ParkingLot();
-        ParkingBoy parkingBoy = new ParkingBoy (parkingLot);
-        for (int i =0;i<=10;i++) {
+        List<ParkingLot> parkingLots = new ArrayList<>();
+        parkingLots.add(parkingLot);
+        ParkingBoy parkingBoy = new ParkingBoy(parkingLots);
+        for (int i = 0; i < 10; i++) {
             parkingBoy.parkCar(new Car());
         }
 
@@ -116,10 +130,12 @@ public class ParkingBoyTest {
 
 
     @Test
-    public void should_return_no_ticket_when_parking_car_given_no_car () {
+    public void should_return_no_ticket_when_parking_car_given_no_car() {
         //Given
         ParkingLot parkingLot = new ParkingLot();
-        ParkingBoy parkingBoy = new ParkingBoy (parkingLot);
+        List<ParkingLot> parkingLots = new ArrayList<>();
+        parkingLots.add(parkingLot);
+        ParkingBoy parkingBoy = new ParkingBoy(parkingLots);
 
         //When
         ParkingCarResult parkingCarResult = parkingBoy.parkCar(null);
@@ -129,11 +145,13 @@ public class ParkingBoyTest {
     }
 
     @Test
-    public void should_return_message_about_unrecognized__ticket_when_fetch_car_given_wrong_ticket () {
+    public void should_return_message_about_unrecognized_ticket_when_fetch_car_given_wrong_ticket() {
         //Given
+        List<ParkingLot> parkingLots = new ArrayList<>();
         ParkingLot parkingLot = new ParkingLot();
+        parkingLots.add(parkingLot);
         Car car1 = new Car();
-        ParkingBoy parkingBoy = new ParkingBoy (parkingLot);
+        ParkingBoy parkingBoy = new ParkingBoy(parkingLots);
         ParkingCarResult parkingCarResult = parkingBoy.parkCar(car1);
 
         //When
@@ -143,12 +161,15 @@ public class ParkingBoyTest {
         Assertions.assertSame("Unrecognized parking ticket", fetchCarResult.getResultMessage());
     }
 
+
     @Test
-    public void should_return_message_about_provide_ticket_when_fetch_car_given_have_no_ticket () {
+    public void should_return_message_about_provide_ticket_when_fetch_car_given_have_no_ticket() {
         //Given
+        List<ParkingLot> parkingLots = new ArrayList<>();
         ParkingLot parkingLot = new ParkingLot();
+        parkingLots.add(parkingLot);
         Car car1 = new Car();
-        ParkingBoy parkingBoy = new ParkingBoy (parkingLot);
+        ParkingBoy parkingBoy = new ParkingBoy(parkingLots);
         ParkingCarResult parkingCarResult = parkingBoy.parkCar(car1);
 
         //When
@@ -159,11 +180,13 @@ public class ParkingBoyTest {
     }
 
     @Test
-    public void should_return_message_about_not_enough_position_when_parking_car_given_no_position () {
+    public void should_return_message_about_not_enough_position_when_parking_car_given_no_position() {
         //Given
+        List<ParkingLot> parkingLots = new ArrayList<>();
         ParkingLot parkingLot = new ParkingLot();
-        ParkingBoy parkingBoy = new ParkingBoy (parkingLot);
-        for (int i =0;i<=10;i++) {
+        parkingLots.add(parkingLot);
+        ParkingBoy parkingBoy = new ParkingBoy(parkingLots);
+        for (int i = 0; i < 10; i++) {
             parkingBoy.parkCar(new Car());
         }
 
@@ -174,4 +197,25 @@ public class ParkingBoyTest {
         Assertions.assertSame("Not enough position.", parkingCarResult.getResultMessage());
     }
 
+    @Test
+    public void should_return_ticket_when_parking_car_given_11_cars() {
+        //Given
+        ParkingLot parkingLot1 = new ParkingLot();
+        ParkingLot parkingLot2 = new ParkingLot();
+        List<ParkingLot> parkingLots = new ArrayList<>();
+        parkingLots.add(parkingLot1);
+        parkingLots.add(parkingLot2);
+        ParkingBoy parkingBoy = new ParkingBoy(parkingLots);
+        for (int i = 0; i < 10; i++) {
+            parkingBoy.parkCar(new Car());
+        }
+        Car car = new Car();
+
+        //When
+        ParkingCarResult parkingCarResult = parkingBoy.parkCar(car);
+
+        // Then
+        Assertions.assertNotNull(parkingCarResult.getParkingTicket());
     }
+
+}
