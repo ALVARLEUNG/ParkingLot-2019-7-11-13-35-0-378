@@ -229,18 +229,44 @@ public class ParkingBoyTest {
         parkingLots.add(parkingLot1);
         parkingLots.add(parkingLot2);
 
-        SmartParkingBoy smartParkingBoy = new SmartParkingBoy(parkingLots);
-
 
         Car car1 = new Car();
         HashMap<ParkingTicket, Car> parkingCarTicket = new HashMap<>();
         parkingCarTicket.put(new ParkingTicket(), car1);
-        parkingLot1.setParkingCarTicket(parkingCarTicket);
+        parkingLot2.setParkingCarTicket(parkingCarTicket);
+        SmartParkingBoy smartParkingBoy = new SmartParkingBoy(parkingLots);
 
 
         //When
         Car car2 = new Car();
         ParkingCarResult parkingCarResult =  smartParkingBoy.parkCar(car2);
+
+        // Then
+        Assertions.assertTrue(parkingLot1.getParkingCarTicket().containsKey(parkingCarResult.getParkingTicket()));
+    }
+
+
+    @Test
+    public void should_park_the_car_in_second_lot_when_parking_car_by_super_smart_boy_given_first_larger_available_position_rate_then_second_lot() {
+        //Given
+        ParkingLot parkingLot1 = new ParkingLot();
+        ParkingLot parkingLot2 = new ParkingLot();
+        List<ParkingLot> parkingLots = new ArrayList<>();
+        Car car1 = new Car();
+        HashMap<ParkingTicket, Car> parkingCarTicket = new HashMap<>();
+        parkingCarTicket.put(new ParkingTicket(), car1);
+        parkingCarTicket.put(new ParkingTicket(), new Car());
+        parkingLot1.setParkingCarTicket(parkingCarTicket);
+        parkingLots.add(parkingLot1);
+        parkingLots.add(parkingLot2);
+
+        SuperSmartParkingBoy superSmartParkingBoy = new SuperSmartParkingBoy(parkingLots);
+
+
+
+        //When
+        Car car2 = new Car();
+        ParkingCarResult parkingCarResult =  superSmartParkingBoy.parkCar(car2);
 
         // Then
         Assertions.assertTrue(parkingLot2.getParkingCarTicket().containsKey(parkingCarResult.getParkingTicket()));
