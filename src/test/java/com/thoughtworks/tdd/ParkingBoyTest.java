@@ -371,5 +371,25 @@ public class ParkingBoyTest {
         Assertions.assertSame("Unrecognized parking ticket", fetchCarResult.getResultMessage());
     }
 
+    @Test
+    public void should_return_message_to_manager_about_provide_ticket_when_fetch_car_given_have_no_ticket() {
+        //Given
+        List<ParkingLot> parkingLots = new ArrayList<>();
+        ParkingLot parkingLot = new ParkingLot();
+        parkingLots.add(parkingLot);
+        Car car = new Car();
+        List<ParkingBoy> parkingBoys = new ArrayList<>();
+        ParkingBoy parkingBoy = new ParkingBoy(parkingLots);
+        parkingBoys.add(parkingBoy);
+
+        ParkingLotManager parkingLotManager = new ParkingLotManager(parkingLot, parkingBoys);
+        ParkingCarResult parkingCarResult = parkingLotManager.chooseParkingBoyToPark(parkingBoy,car);
+
+        //When
+        FetchCarResult fetchCarResult = parkingLotManager.chooseParkingBoyToFetch(parkingBoy,null);
+
+        // Then
+        Assertions.assertSame("Please provide your parking ticket", fetchCarResult.getResultMessage());
+    }
 
 }
