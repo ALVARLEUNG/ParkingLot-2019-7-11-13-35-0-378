@@ -1,13 +1,11 @@
 package com.thoughtworks.tdd;
 
-import jdk.nashorn.internal.ir.annotations.Ignore;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class ParkingBoyTest {
 
@@ -238,7 +236,7 @@ public class ParkingBoyTest {
 
         //When
         Car car2 = new Car();
-        ParkingCarResult parkingCarResult =  smartParkingBoy.parkCar(car2);
+        ParkingCarResult parkingCarResult = smartParkingBoy.parkCar(car2);
 
         // Then
         Assertions.assertTrue(parkingLot1.getParkingCarTicket().containsKey(parkingCarResult.getParkingTicket()));
@@ -263,40 +261,68 @@ public class ParkingBoyTest {
 
         //When
         Car car2 = new Car();
-        ParkingCarResult parkingCarResult =  superSmartParkingBoy.parkCar(car2);
+        ParkingCarResult parkingCarResult = superSmartParkingBoy.parkCar(car2);
 
         // Then
         Assertions.assertTrue(parkingLot2.getParkingCarTicket().containsKey(parkingCarResult.getParkingTicket()));
     }
 
 
-    @Ignore
+    //    @Ignore
     @Test
-    public void should_return_car_when_manage1_add_parking_boy_to_fetch_car_given_2_parking_lot_and_have_ticket_by_parking_the_car() {
+    public void should_return_ticket_when_manage1_add_parking_boy_to_park_car_given_2_parking_lot_and_have_ticket_by_parking_the_car() {
+
+        // given
         ParkingLot parkingLot1 = new ParkingLot();
         ParkingLot parkingLot2 = new ParkingLot();
-        List<ParkingLot> parkingLots = new ArrayList<>();
-        parkingLots.add(parkingLot1);
-        parkingLots.add(parkingLot2);
+        List<ParkingLot> parkingLots1 = new ArrayList<>();
+        List<ParkingLot> parkingLots2 = new ArrayList<>();
+        parkingLots1.add(parkingLot1);
 
-        Car car1 = new Car();
-        Car car2 = new Car();
+        Car car = new Car();
 
-        HashMap<ParkingTicket, Car> parkingCarTicket = new HashMap<>();
-        parkingCarTicket.put(new ParkingTicket(), car2);
-        parkingLot2.setParkingCarTicket(parkingCarTicket);
-        ParkingBoy parkingBoy = new ParkingBoy(parkingLots);
+        ParkingBoy parkingBoy = new ParkingBoy(parkingLots1);
 
 
         List<ParkingBoy> parkingBoys = new ArrayList<>();
         parkingBoys.add(parkingBoy);
-        ParkingLotManage parkingLotManage = new ParkingLotManage(parkingLot1, parkingBoys);
+        ParkingLotManager parkingLotManager = new ParkingLotManager(parkingLot1, parkingBoys);
 
-        ParkingCarResult parkingCarResult = parkingBoy.parkCar(car1);
+        // when
+        ParkingCarResult parkingCarResult = parkingLotManager.chooseParkingBoyToPark(parkingBoy, car);
 
-        FetchCarResult fetchCarResult = parkingBoy.fetchCar(parkingCarResult.getParkingTicket());
+        //then
+        Assertions.assertTrue(parkingLot1.getParkingCarTicket().containsKey(parkingCarResult.getParkingTicket()));
 
-        Assertions.assertSame(car1, fetchCarResult.getCar());
+    }
+
+    @Test
+    public void should_return_car_when_manage1_add_parking_boy_to_fetch_car_given_2_parking_lot_and_have_ticket_by_parking_the_car() {
+
+        // given
+        ParkingLot parkingLot1 = new ParkingLot();
+        ParkingLot parkingLot2 = new ParkingLot();
+        List<ParkingLot> parkingLots1 = new ArrayList<>();
+        List<ParkingLot> parkingLots2 = new ArrayList<>();
+        parkingLots1.add(parkingLot1);
+
+        Car car = new Car();
+
+        ParkingBoy parkingBoy = new ParkingBoy(parkingLots1);
+
+
+        List<ParkingBoy> parkingBoys = new ArrayList<>();
+        parkingBoys.add(parkingBoy);
+        ParkingLotManager parkingLotManager = new ParkingLotManager(parkingLot1, parkingBoys);
+
+        // when
+        ParkingCarResult parkingCarResult = parkingLotManager.chooseParkingBoyToPark(parkingBoy, car);
+
+        //then
+        FetchCarResult fetchCarResult = parkingLotManager.chooseParkingBoyToFetch(parkingBoy, parkingCarResult.getParkingTicket());
+
+        Assertions.assertSame(car, fetchCarResult.getCar());
+
     }
 
 }

@@ -2,12 +2,12 @@ package com.thoughtworks.tdd;
 
 import java.util.List;
 
-public class ParkingLotManage {
+public class ParkingLotManager {
 
     private ParkingLot parkingLot;
     private List<ParkingBoy> parkingBoys;
 
-    public ParkingLotManage(ParkingLot parkingLot, List<ParkingBoy> parkingBoys) {
+    public ParkingLotManager(ParkingLot parkingLot, List<ParkingBoy> parkingBoys) {
         this.parkingLot = parkingLot;
         this.parkingBoys = parkingBoys;
     }
@@ -37,5 +37,19 @@ public class ParkingLotManage {
             fetchCarResult.setResultMessage("Unrecognized parking ticket");
             return fetchCarResult;
         }
+    }
+
+    public ParkingCarResult chooseParkingBoyToPark(ParkingBoy parkingBoy, Car car) {
+        if (this.parkingBoys.contains(parkingBoy)) {
+            return parkingBoy.parkCar(car);
+        }
+        return null;
+    }
+
+    public FetchCarResult chooseParkingBoyToFetch(ParkingBoy parkingBoy, ParkingTicket parkingTicket) {
+        if (this.parkingBoys.contains(parkingBoy)) {
+            return parkingBoy.fetchCar(parkingTicket);
+        }
+        return null;
     }
 }
