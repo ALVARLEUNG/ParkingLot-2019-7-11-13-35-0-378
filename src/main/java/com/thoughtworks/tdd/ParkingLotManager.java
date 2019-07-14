@@ -12,6 +12,10 @@ public class ParkingLotManager {
         this.parkingBoys = parkingBoys;
     }
 
+    public ParkingLotManager(ParkingLot parkingLot) {
+        this.parkingLot = parkingLot;
+    }
+
     public ParkingCarResult parkingCar(Car car) {
         if (null != car) {
             if (parkingLot.getParkingCarTicket().size() < 10) {

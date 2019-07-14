@@ -325,4 +325,27 @@ public class ParkingBoyTest {
 
     }
 
+    @Test
+    public void should_return_car_when_manage_parking_car_fetch_car_given_2_parking_lot_and_have_ticket_by_parking_the_car() {
+
+        // given
+        ParkingLot parkingLot1 = new ParkingLot();
+        ParkingLot parkingLot2 = new ParkingLot();
+        List<ParkingLot> parkingLots1 = new ArrayList<>();
+        List<ParkingLot> parkingLots2 = new ArrayList<>();
+        parkingLots1.add(parkingLot1);
+
+        Car car = new Car();
+
+        ParkingLotManager parkingLotManager = new ParkingLotManager(parkingLot1);
+
+        // when
+        ParkingCarResult parkingCarResult = parkingLotManager.parkingCar(car);
+
+        //then
+        FetchCarResult fetchCarResult = parkingLotManager.fetchCar(parkingCarResult.getParkingTicket());
+
+        Assertions.assertSame(car, fetchCarResult.getCar());
+    }
+
 }
