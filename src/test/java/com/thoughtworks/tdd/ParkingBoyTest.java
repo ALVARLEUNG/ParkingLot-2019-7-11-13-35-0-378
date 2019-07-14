@@ -1,5 +1,6 @@
 package com.thoughtworks.tdd;
 
+import jdk.nashorn.internal.ir.annotations.Ignore;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -26,8 +27,6 @@ public class ParkingBoyTest {
 
         // Then
         Assertions.assertSame(car, fetchCarResult.getCar());
-
-
     }
 
     @Test
@@ -262,14 +261,42 @@ public class ParkingBoyTest {
 
         SuperSmartParkingBoy superSmartParkingBoy = new SuperSmartParkingBoy(parkingLots);
 
-
-
         //When
         Car car2 = new Car();
         ParkingCarResult parkingCarResult =  superSmartParkingBoy.parkCar(car2);
 
         // Then
         Assertions.assertTrue(parkingLot2.getParkingCarTicket().containsKey(parkingCarResult.getParkingTicket()));
+    }
+
+
+    @Ignore
+    @Test
+    public void should_return_car_when_manage1_add_parking_boy_to_fetch_car_given_2_parking_lot_and_have_ticket_by_parking_the_car() {
+        ParkingLot parkingLot1 = new ParkingLot();
+        ParkingLot parkingLot2 = new ParkingLot();
+        List<ParkingLot> parkingLots = new ArrayList<>();
+        parkingLots.add(parkingLot1);
+        parkingLots.add(parkingLot2);
+
+        Car car1 = new Car();
+        Car car2 = new Car();
+
+        HashMap<ParkingTicket, Car> parkingCarTicket = new HashMap<>();
+        parkingCarTicket.put(new ParkingTicket(), car2);
+        parkingLot2.setParkingCarTicket(parkingCarTicket);
+        ParkingBoy parkingBoy = new ParkingBoy(parkingLots);
+
+
+        List<ParkingBoy> parkingBoys = new ArrayList<>();
+        parkingBoys.add(parkingBoy);
+        ParkingLotManage parkingLotManage = new ParkingLotManage(parkingLot1, parkingBoys);
+
+        ParkingCarResult parkingCarResult = parkingBoy.parkCar(car1);
+
+        FetchCarResult fetchCarResult = parkingBoy.fetchCar(parkingCarResult.getParkingTicket());
+
+        Assertions.assertSame(car1, fetchCarResult.getCar());
     }
 
 }
