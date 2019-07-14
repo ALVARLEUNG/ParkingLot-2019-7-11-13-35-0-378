@@ -392,4 +392,27 @@ public class ParkingBoyTest {
         Assertions.assertSame("Please provide your parking ticket", fetchCarResult.getResultMessage());
     }
 
+    @Test
+    public void should_return_message_to_manager_about_not_enough_position_when_parking_car_given_no_position() {
+        //Given
+        List<ParkingLot> parkingLots = new ArrayList<>();
+        ParkingLot parkingLot = new ParkingLot();
+        parkingLots.add(parkingLot);
+        ParkingBoy parkingBoy = new ParkingBoy(parkingLots);
+        for (int i = 0; i < 10; i++) {
+            parkingBoy.parkCar(new Car());
+        }
+
+        List <ParkingBoy> parkingBoys = new ArrayList<>();
+        parkingBoys.add(parkingBoy);
+
+        ParkingLotManager parkingLotManager = new ParkingLotManager(parkingLot, parkingBoys);
+
+        //When
+        ParkingCarResult parkingCarResult = parkingLotManager.chooseParkingBoyToPark(parkingBoy, new Car());
+
+        // Then
+        Assertions.assertSame("Not enough position.", parkingCarResult.getResultMessage());
+    }
+
 }
