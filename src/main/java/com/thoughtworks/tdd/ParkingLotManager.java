@@ -1,24 +1,28 @@
 package com.thoughtworks.tdd;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class ParkingLotManager {
+public class ParkingLotManager extends ParkingBoy{
 
     private ParkingLot parkingLot;
     private List<ParkingBoy> parkingBoys;
 
     public ParkingLotManager(ParkingLot parkingLot, List<ParkingBoy> parkingBoys) {
+        super(new ArrayList<ParkingLot>());
         this.parkingLot = parkingLot;
         this.parkingBoys = parkingBoys;
     }
 
     public ParkingLotManager(ParkingLot parkingLot) {
+        super(new ArrayList<ParkingLot>());
         this.parkingLot = parkingLot;
     }
 
-    public ParkingCarResult parkingCar(Car car) {
+    @Override
+    public ParkingCarResult parkCar(Car car) {
         if (null != car) {
-            if (parkingLot.getParkingCarTicket().size() < 10) {
+            if (parkingLot.getParkingCarTicket().size() < parkingLot.getLimit()) {
                 return parkingLot.park(car);
             } else {
                 ParkingCarResult parkingCarResult = new ParkingCarResult();
@@ -29,6 +33,7 @@ public class ParkingLotManager {
         return new ParkingCarResult();
     }
 
+    @Override
     public FetchCarResult fetchCar(ParkingTicket ticket) {
         FetchCarResult fetchCarResult = new FetchCarResult();
         if (ticket == null) {

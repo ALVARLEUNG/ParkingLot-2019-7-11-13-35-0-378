@@ -249,7 +249,7 @@ public class ParkingBoyTest {
     public void should_park_the_car_in_second_lot_when_parking_car_by_super_smart_boy_given_first_larger_available_position_rate_then_second_lot() {
         //Given
         ParkingLot parkingLot1 = new ParkingLot(10);
-        ParkingLot parkingLot2 = new ParkingLot(10);
+        ParkingLot parkingLot2 = new ParkingLot(20);
         List<ParkingLot> parkingLots = new ArrayList<>();
         Car car1 = new Car();
         HashMap<ParkingTicket, Car> parkingCarTicket = new HashMap<>();
@@ -331,8 +331,8 @@ public class ParkingBoyTest {
     public void should_return_car_when_manage_parking_car_fetch_car_given_2_parking_lot_and_have_ticket_by_parking_the_car() {
 
         // given
-        ParkingLot parkingLot1 = new ParkingLot();
-        ParkingLot parkingLot2 = new ParkingLot();
+        ParkingLot parkingLot1 = new ParkingLot(10);
+        ParkingLot parkingLot2 = new ParkingLot(10);
         List<ParkingLot> parkingLots1 = new ArrayList<>();
         List<ParkingLot> parkingLots2 = new ArrayList<>();
         parkingLots1.add(parkingLot1);
@@ -342,7 +342,7 @@ public class ParkingBoyTest {
         ParkingLotManager parkingLotManager = new ParkingLotManager(parkingLot1);
 
         // when
-        ParkingCarResult parkingCarResult = parkingLotManager.parkingCar(car);
+        ParkingCarResult parkingCarResult = parkingLotManager.parkCar(car);
 
         //then
         FetchCarResult fetchCarResult = parkingLotManager.fetchCar(parkingCarResult.getParkingTicket());
