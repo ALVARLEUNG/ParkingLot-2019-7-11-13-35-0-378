@@ -15,7 +15,7 @@ public class ParkingBoyTest {
     public void should_return_car_when_fetch_car_given_have_ticket_by_parking_the_car() {
 
         //Given
-        ParkingLot parkingLot = new ParkingLot();
+        ParkingLot parkingLot = new ParkingLot(10);
         List<ParkingLot> parkingLots = new ArrayList<>();
         parkingLots.add(parkingLot);
         Car car = new Car();
@@ -52,7 +52,7 @@ public class ParkingBoyTest {
     public void should_return_car_when_fetch_car_given_ticket_to_fetch_the_car() {
 
         //Given
-        ParkingLot parkingLot = new ParkingLot();
+        ParkingLot parkingLot = new ParkingLot(10);
         List<ParkingLot> parkingLots = new ArrayList<>();
         parkingLots.add(parkingLot);
         Car car1 = new Car();
@@ -114,7 +114,7 @@ public class ParkingBoyTest {
     @Test
     public void should_return_no_ticket_when_parking_car_given_more_then_limit_cars() {
         //Given
-        ParkingLot parkingLot = new ParkingLot();
+        ParkingLot parkingLot = new ParkingLot(10);
         List<ParkingLot> parkingLots = new ArrayList<>();
         parkingLots.add(parkingLot);
         ParkingBoy parkingBoy = new ParkingBoy(parkingLots);
@@ -184,7 +184,7 @@ public class ParkingBoyTest {
     public void should_return_message_about_not_enough_position_when_parking_car_given_no_position() {
         //Given
         List<ParkingLot> parkingLots = new ArrayList<>();
-        ParkingLot parkingLot = new ParkingLot();
+        ParkingLot parkingLot = new ParkingLot(10);
         parkingLots.add(parkingLot);
         ParkingBoy parkingBoy = new ParkingBoy(parkingLots);
         for (int i = 0; i < 10; i++) {
@@ -201,8 +201,8 @@ public class ParkingBoyTest {
     @Test
     public void should_return_ticket_when_parking_car_given_11_cars() {
         //Given
-        ParkingLot parkingLot1 = new ParkingLot();
-        ParkingLot parkingLot2 = new ParkingLot();
+        ParkingLot parkingLot1 = new ParkingLot(10);
+        ParkingLot parkingLot2 = new ParkingLot(10);
         List<ParkingLot> parkingLots = new ArrayList<>();
         parkingLots.add(parkingLot1);
         parkingLots.add(parkingLot2);
@@ -248,8 +248,8 @@ public class ParkingBoyTest {
     @Test
     public void should_park_the_car_in_second_lot_when_parking_car_by_super_smart_boy_given_first_larger_available_position_rate_then_second_lot() {
         //Given
-        ParkingLot parkingLot1 = new ParkingLot();
-        ParkingLot parkingLot2 = new ParkingLot();
+        ParkingLot parkingLot1 = new ParkingLot(10);
+        ParkingLot parkingLot2 = new ParkingLot(10);
         List<ParkingLot> parkingLots = new ArrayList<>();
         Car car1 = new Car();
         HashMap<ParkingTicket, Car> parkingCarTicket = new HashMap<>();
@@ -275,8 +275,8 @@ public class ParkingBoyTest {
     public void should_return_ticket_when_manage1_add_parking_boy_to_park_car_given_2_parking_lot_and_have_ticket_by_parking_the_car() {
 
         // given
-        ParkingLot parkingLot1 = new ParkingLot();
-        ParkingLot parkingLot2 = new ParkingLot();
+        ParkingLot parkingLot1 = new ParkingLot(10);
+        ParkingLot parkingLot2 = new ParkingLot(10);
         List<ParkingLot> parkingLots1 = new ArrayList<>();
         List<ParkingLot> parkingLots2 = new ArrayList<>();
         parkingLots1.add(parkingLot1);
@@ -302,8 +302,8 @@ public class ParkingBoyTest {
     public void should_return_car_when_manage1_add_parking_boy_to_fetch_car_given_2_parking_lot_and_have_ticket_by_parking_the_car() {
 
         // given
-        ParkingLot parkingLot1 = new ParkingLot();
-        ParkingLot parkingLot2 = new ParkingLot();
+        ParkingLot parkingLot1 = new ParkingLot(10);
+        ParkingLot parkingLot2 = new ParkingLot(10);
         List<ParkingLot> parkingLots1 = new ArrayList<>();
         List<ParkingLot> parkingLots2 = new ArrayList<>();
         parkingLots1.add(parkingLot1);
@@ -396,7 +396,7 @@ public class ParkingBoyTest {
     public void should_return_message_to_manager_about_not_enough_position_when_parking_car_given_no_position() {
         //Given
         List<ParkingLot> parkingLots = new ArrayList<>();
-        ParkingLot parkingLot = new ParkingLot();
+        ParkingLot parkingLot = new ParkingLot(10);
         parkingLots.add(parkingLot);
         ParkingBoy parkingBoy = new ParkingBoy(parkingLots);
         for (int i = 0; i < 10; i++) {

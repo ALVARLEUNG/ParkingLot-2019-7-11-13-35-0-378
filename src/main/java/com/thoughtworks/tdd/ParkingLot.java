@@ -4,10 +4,16 @@ import java.util.HashMap;
 
 public class ParkingLot {
 
+    private int limit;
     private HashMap<ParkingTicket, Car> parkingCarTicket;
 
     public ParkingLot() {
-        this.parkingCarTicket = new HashMap<>(10);
+        this.parkingCarTicket = new HashMap<>();
+    }
+
+    public ParkingLot(int limit) {
+        this.limit = limit;
+        this.parkingCarTicket = new HashMap<>();
     }
 
     public FetchCarResult getCar(ParkingTicket ticket) {
@@ -31,5 +37,9 @@ public class ParkingLot {
 
     public void setParkingCarTicket(HashMap<ParkingTicket, Car> parkingCarTicket) {
         this.parkingCarTicket = parkingCarTicket;
+    }
+
+    public int getLimit() {
+        return limit;
     }
 }

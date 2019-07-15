@@ -13,7 +13,7 @@ public class ParkingBoy {
     public ParkingCarResult parkCar(Car car) {
         if (null == car) return new ParkingCarResult();
         for (ParkingLot parkingLot : parkingLots) {
-            if (parkingLot.getParkingCarTicket().size() < 10) {
+            if (parkingLot.getParkingCarTicket().size() < parkingLot.getLimit()) {
                 return parkingLot.park(car);
             }
         }
