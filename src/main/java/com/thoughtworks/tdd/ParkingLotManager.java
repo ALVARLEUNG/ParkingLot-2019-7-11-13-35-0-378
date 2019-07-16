@@ -20,7 +20,7 @@ public class ParkingLotManager extends ParkingBoy{
     }
 
     @Override
-    public ParkingCarResult parkCar(Car car) {
+    public ParkingCarResult parkCarInTheLot(Car car) {
         if (null != car) {
             if (parkingLot.getParkingCarTicket().size() < parkingLot.getLimit()) {
                 return parkingLot.park(car);
@@ -34,7 +34,7 @@ public class ParkingLotManager extends ParkingBoy{
     }
 
     @Override
-    public FetchCarResult fetchCar(ParkingTicket ticket) {
+    public FetchCarResult fetchCarInTheLot(ParkingTicket ticket) {
         FetchCarResult fetchCarResult = new FetchCarResult();
         if (ticket == null) {
             fetchCarResult.setResultMessage("Please provide your parking ticket");
@@ -50,14 +50,14 @@ public class ParkingLotManager extends ParkingBoy{
 
     public ParkingCarResult chooseParkingBoyToPark(ParkingBoy parkingBoy, Car car) {
         if (this.parkingBoys.contains(parkingBoy)) {
-            return parkingBoy.parkCar(car);
+            return parkingBoy.parkCarInTheLot(car);
         }
         return null;
     }
 
     public FetchCarResult chooseParkingBoyToFetch(ParkingBoy parkingBoy, ParkingTicket parkingTicket) {
         if (this.parkingBoys.contains(parkingBoy)) {
-            return parkingBoy.fetchCar(parkingTicket);
+            return parkingBoy.fetchCarInTheLot(parkingTicket);
         }
         return null;
     }

@@ -10,7 +10,7 @@ public class ParkingBoy {
     }
 
 
-    public ParkingCarResult parkCar(Car car) {
+    public ParkingCarResult parkCarInTheLot(Car car) {
         if (null == car) return new ParkingCarResult();
         for (ParkingLot parkingLot : parkingLots) {
             if (parkingLot.getParkingCarTicket().size() < parkingLot.getLimit()) {
@@ -22,7 +22,7 @@ public class ParkingBoy {
         return parkingCarResult;
     }
 
-    public FetchCarResult fetchCar(ParkingTicket ticket) {
+    public FetchCarResult fetchCarInTheLot(ParkingTicket ticket) {
         FetchCarResult fetchCarResult = new FetchCarResult();
         if (ticket == null) {
             fetchCarResult.setResultMessage("Please provide your parking ticket");

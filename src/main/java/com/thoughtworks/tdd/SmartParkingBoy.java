@@ -9,7 +9,7 @@ public class SmartParkingBoy extends ParkingBoy {
     }
 
     @Override
-    public ParkingCarResult parkCar(Car car) {
+    public ParkingCarResult parkCarInTheLot(Car car) {
         if (null == car) return new ParkingCarResult();
         ParkingLot parkingLot = this.getParkingLots().stream().reduce((item, items) -> item.getParkingCarTicket().size() > items.getParkingCarTicket().size() ? items : item).orElse(null);
         if (parkingLot.getParkingCarTicket().size() < 10) {

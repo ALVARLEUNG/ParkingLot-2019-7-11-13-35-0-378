@@ -1,10 +1,8 @@
 package com.thoughtworks.tdd;
 
-import com.sun.xml.internal.bind.v2.runtime.reflect.Lister;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -20,10 +18,10 @@ public class ParkingBoyTest {
         parkingLots.add(parkingLot);
         Car car = new Car();
         ParkingBoy parkingBoy = new ParkingBoy(parkingLots);
-        ParkingCarResult parkingCarResult = parkingBoy.parkCar(car);
+        ParkingCarResult parkingCarResult = parkingBoy.parkCarInTheLot(car);
 
         //When
-        FetchCarResult fetchCarResult = parkingBoy.fetchCar(parkingCarResult.getParkingTicket());
+        FetchCarResult fetchCarResult = parkingBoy.fetchCarInTheLot(parkingCarResult.getParkingTicket());
 
         // Then
         Assertions.assertSame(car, fetchCarResult.getCar());
@@ -38,10 +36,10 @@ public class ParkingBoyTest {
         parkingLots.add(parkingLot);
         Car car = new Car();
         ParkingBoy parkingBoy = new ParkingBoy(parkingLots);
-        ParkingCarResult parkingCarResult = parkingBoy.parkCar(car);
+        ParkingCarResult parkingCarResult = parkingBoy.parkCarInTheLot(car);
 
         //When
-        FetchCarResult fetchCarResult = parkingBoy.fetchCar(null);
+        FetchCarResult fetchCarResult = parkingBoy.fetchCarInTheLot(null);
 
         // Then
         Assertions.assertSame(null, fetchCarResult.getCar());
@@ -58,12 +56,12 @@ public class ParkingBoyTest {
         Car car1 = new Car();
         Car car2 = new Car();
         ParkingBoy parkingBoy = new ParkingBoy(parkingLots);
-        ParkingCarResult parkingCarResult1 = parkingBoy.parkCar(car1);
-        ParkingCarResult parkingCarResult2 = parkingBoy.parkCar(car2);
+        ParkingCarResult parkingCarResult1 = parkingBoy.parkCarInTheLot(car1);
+        ParkingCarResult parkingCarResult2 = parkingBoy.parkCarInTheLot(car2);
 
         //When
-        FetchCarResult fetchCarResult1 = parkingBoy.fetchCar(parkingCarResult1.getParkingTicket());
-        FetchCarResult fetchCarResult2 = parkingBoy.fetchCar(parkingCarResult2.getParkingTicket());
+        FetchCarResult fetchCarResult1 = parkingBoy.fetchCarInTheLot(parkingCarResult1.getParkingTicket());
+        FetchCarResult fetchCarResult2 = parkingBoy.fetchCarInTheLot(parkingCarResult2.getParkingTicket());
 
 
 //        // Then
@@ -81,10 +79,10 @@ public class ParkingBoyTest {
         parkingLots.add(parkingLot);
         Car car1 = new Car();
         ParkingBoy parkingBoy = new ParkingBoy(parkingLots);
-        ParkingCarResult parkingCarResult = parkingBoy.parkCar(car1);
+        ParkingCarResult parkingCarResult = parkingBoy.parkCarInTheLot(car1);
 
         //When
-        FetchCarResult fetchCarResult = parkingBoy.fetchCar(new ParkingTicket());
+        FetchCarResult fetchCarResult = parkingBoy.fetchCarInTheLot(new ParkingTicket());
 
         // Then
         Assertions.assertSame(null, fetchCarResult.getCar());
@@ -100,11 +98,11 @@ public class ParkingBoyTest {
         parkingLots.add(parkingLot);
         Car car = new Car();
         ParkingBoy parkingBoy = new ParkingBoy(parkingLots);
-        ParkingCarResult parkingCarResult = parkingBoy.parkCar(car);
+        ParkingCarResult parkingCarResult = parkingBoy.parkCarInTheLot(car);
 
         //When
-        FetchCarResult fetchCarResult1 = parkingBoy.fetchCar(parkingCarResult.getParkingTicket());
-        FetchCarResult fetchCarResult2 = parkingBoy.fetchCar(parkingCarResult.getParkingTicket());
+        FetchCarResult fetchCarResult1 = parkingBoy.fetchCarInTheLot(parkingCarResult.getParkingTicket());
+        FetchCarResult fetchCarResult2 = parkingBoy.fetchCarInTheLot(parkingCarResult.getParkingTicket());
 
         // Then
         Assertions.assertSame(null, fetchCarResult2.getCar());
@@ -119,11 +117,11 @@ public class ParkingBoyTest {
         parkingLots.add(parkingLot);
         ParkingBoy parkingBoy = new ParkingBoy(parkingLots);
         for (int i = 0; i < 10; i++) {
-            parkingBoy.parkCar(new Car());
+            parkingBoy.parkCarInTheLot(new Car());
         }
 
         //When
-        ParkingCarResult parkingCarResult = parkingBoy.parkCar(new Car());
+        ParkingCarResult parkingCarResult = parkingBoy.parkCarInTheLot(new Car());
 
         // Then
         Assertions.assertSame(null, parkingCarResult.getParkingTicket());
@@ -139,7 +137,7 @@ public class ParkingBoyTest {
         ParkingBoy parkingBoy = new ParkingBoy(parkingLots);
 
         //When
-        ParkingCarResult parkingCarResult = parkingBoy.parkCar(null);
+        ParkingCarResult parkingCarResult = parkingBoy.parkCarInTheLot(null);
 
         // Then
         Assertions.assertSame(null, parkingCarResult.getParkingTicket());
@@ -153,10 +151,10 @@ public class ParkingBoyTest {
         parkingLots.add(parkingLot);
         Car car1 = new Car();
         ParkingBoy parkingBoy = new ParkingBoy(parkingLots);
-        ParkingCarResult parkingCarResult = parkingBoy.parkCar(car1);
+        ParkingCarResult parkingCarResult = parkingBoy.parkCarInTheLot(car1);
 
         //When
-        FetchCarResult fetchCarResult = parkingBoy.fetchCar(new ParkingTicket());
+        FetchCarResult fetchCarResult = parkingBoy.fetchCarInTheLot(new ParkingTicket());
 
         // Then
         Assertions.assertSame("Unrecognized parking ticket", fetchCarResult.getResultMessage());
@@ -171,10 +169,10 @@ public class ParkingBoyTest {
         parkingLots.add(parkingLot);
         Car car1 = new Car();
         ParkingBoy parkingBoy = new ParkingBoy(parkingLots);
-        ParkingCarResult parkingCarResult = parkingBoy.parkCar(car1);
+        ParkingCarResult parkingCarResult = parkingBoy.parkCarInTheLot(car1);
 
         //When
-        FetchCarResult fetchCarResult = parkingBoy.fetchCar(null);
+        FetchCarResult fetchCarResult = parkingBoy.fetchCarInTheLot(null);
 
         // Then
         Assertions.assertSame("Please provide your parking ticket", fetchCarResult.getResultMessage());
@@ -188,11 +186,11 @@ public class ParkingBoyTest {
         parkingLots.add(parkingLot);
         ParkingBoy parkingBoy = new ParkingBoy(parkingLots);
         for (int i = 0; i < 10; i++) {
-            parkingBoy.parkCar(new Car());
+            parkingBoy.parkCarInTheLot(new Car());
         }
 
         //When
-        ParkingCarResult parkingCarResult = parkingBoy.parkCar(new Car());
+        ParkingCarResult parkingCarResult = parkingBoy.parkCarInTheLot(new Car());
 
         // Then
         Assertions.assertSame("Not enough position.", parkingCarResult.getResultMessage());
@@ -208,12 +206,12 @@ public class ParkingBoyTest {
         parkingLots.add(parkingLot2);
         ParkingBoy parkingBoy = new ParkingBoy(parkingLots);
         for (int i = 0; i < 10; i++) {
-            parkingBoy.parkCar(new Car());
+            parkingBoy.parkCarInTheLot(new Car());
         }
         Car car = new Car();
 
         //When
-        ParkingCarResult parkingCarResult = parkingBoy.parkCar(car);
+        ParkingCarResult parkingCarResult = parkingBoy.parkCarInTheLot(car);
 
         // Then
         Assertions.assertNotNull(parkingCarResult.getParkingTicket());
@@ -238,7 +236,7 @@ public class ParkingBoyTest {
 
         //When
         Car car2 = new Car();
-        ParkingCarResult parkingCarResult = smartParkingBoy.parkCar(car2);
+        ParkingCarResult parkingCarResult = smartParkingBoy.parkCarInTheLot(car2);
 
         // Then
         Assertions.assertTrue(parkingLot1.getParkingCarTicket().containsKey(parkingCarResult.getParkingTicket()));
@@ -263,7 +261,7 @@ public class ParkingBoyTest {
 
         //When
         Car car2 = new Car();
-        ParkingCarResult parkingCarResult = superSmartParkingBoy.parkCar(car2);
+        ParkingCarResult parkingCarResult = superSmartParkingBoy.parkCarInTheLot(car2);
 
         // Then
         Assertions.assertTrue(parkingLot2.getParkingCarTicket().containsKey(parkingCarResult.getParkingTicket()));
@@ -342,10 +340,10 @@ public class ParkingBoyTest {
         ParkingLotManager parkingLotManager = new ParkingLotManager(parkingLot1);
 
         // when
-        ParkingCarResult parkingCarResult = parkingLotManager.parkCar(car);
+        ParkingCarResult parkingCarResult = parkingLotManager.parkCarInTheLot(car);
 
         //then
-        FetchCarResult fetchCarResult = parkingLotManager.fetchCar(parkingCarResult.getParkingTicket());
+        FetchCarResult fetchCarResult = parkingLotManager.fetchCarInTheLot(parkingCarResult.getParkingTicket());
 
         Assertions.assertSame(car, fetchCarResult.getCar());
     }
@@ -400,7 +398,7 @@ public class ParkingBoyTest {
         parkingLots.add(parkingLot);
         ParkingBoy parkingBoy = new ParkingBoy(parkingLots);
         for (int i = 0; i < 10; i++) {
-            parkingBoy.parkCar(new Car());
+            parkingBoy.parkCarInTheLot(new Car());
         }
 
         List <ParkingBoy> parkingBoys = new ArrayList<>();
