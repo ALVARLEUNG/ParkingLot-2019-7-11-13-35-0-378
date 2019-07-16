@@ -12,7 +12,7 @@ public class SmartParkingBoy extends ParkingBoy {
     public ParkingCarResult parkCarInTheLot(Car car) {
         if (null == car) return new ParkingCarResult();
         ParkingLot parkingLot = this.getParkingLots().stream().reduce((item, items) -> item.getParkingCarTicket().size() > items.getParkingCarTicket().size() ? items : item).orElse(new ParkingLot());
-        if (parkingLot.getParkingCarTicket().size() < 10) {
+        if (parkingLot.getParkingCarTicket().size() < parkingLot.getLimit()) {
             return parkingLot.park(car);
         }
         ParkingCarResult parkingCarResult = new ParkingCarResult();
