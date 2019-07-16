@@ -268,7 +268,6 @@ public class ParkingBoyTest {
     }
 
 
-    //    @Ignore
     @Test
     public void should_return_ticket_when_manage1_add_parking_boy_to_park_car_given_2_parking_lot_and_have_ticket_by_parking_the_car() {
 
